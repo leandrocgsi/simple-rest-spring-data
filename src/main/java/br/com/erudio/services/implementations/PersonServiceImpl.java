@@ -25,7 +25,7 @@ public class PersonServiceImpl implements PersonService {
     public Person create(Person person) {
     	try {
     		logger.info("Creating a person");
-			person = personRepository.create(person);
+			person = personRepository.save(person);
 		} catch (Exception e) {
 			logger.error(e);
 		}
@@ -38,11 +38,24 @@ public class PersonServiceImpl implements PersonService {
     	Person person = new Person();
 		try {
     		logger.info("Finding all persons");
-    		person = personRepository.findById(personId);
+    		person = personRepository.findOne(Long.parseLong(personId));
 		} catch (Exception e) {
 			logger.error(e);
 		}
         return person;
+    }
+    
+    @Override
+    public Person findByName(String name) {
+    	logger.info("Finding a person by ID");
+    	Person person = new Person();
+    	try {
+    		logger.info("Finding all persons");
+    		person = new Person();//personRepository.findOne(name);
+    	} catch (Exception e) {
+    		logger.error(e);
+    	}
+    	return person;
     }
 
     @Override
@@ -62,7 +75,7 @@ public class PersonServiceImpl implements PersonService {
     public Person update(Person person) {
     	try {
     		logger.info("Updating a person");
-			person = personRepository.update(person);
+			person = personRepository.save(person);
 		} catch (Exception e) {
 			logger.error(e);
 		}

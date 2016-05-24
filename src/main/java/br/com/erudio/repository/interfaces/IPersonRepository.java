@@ -1,8 +1,9 @@
 package br.com.erudio.repository.interfaces;
 
-import br.com.erudio.models.Person;
-import br.com.erudio.repository.generic.IGenericRepository;
+import org.springframework.data.repository.CrudRepository;
 
-public interface IPersonRepository extends IGenericRepository<Person>{
+import br.com.erudio.models.Person;
+
+public interface IPersonRepository extends CrudRepository<Person, Long> {
 
 }

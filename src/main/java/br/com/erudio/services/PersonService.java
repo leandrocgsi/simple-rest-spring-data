@@ -8,6 +8,7 @@ public interface PersonService {
     
     Person create(final Person person);
     Person findById(final String personId);
+    Person findByName(String name);
     List<Person> findAll();
     Person update(Person person);
     void delete(Person person);
