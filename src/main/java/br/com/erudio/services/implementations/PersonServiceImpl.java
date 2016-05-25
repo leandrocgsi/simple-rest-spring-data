@@ -46,16 +46,29 @@ public class PersonServiceImpl implements PersonService {
     }
     
     @Override
-    public Person findByName(String name) {
-    	logger.info("Finding a person by ID");
-    	Person person = new Person();
+    public List<Person> findByName(String name) {
+    	logger.info("Finding persons by name");
+    	List<Person> persons = new ArrayList<>();
     	try {
     		logger.info("Finding all persons");
-    		person = new Person();//personRepository.findOne(name);
+    		persons = personRepository.findByName(name);
     	} catch (Exception e) {
     		logger.error(e);
     	}
-    	return person;
+    	return persons;
+    }
+    
+    @Override
+    public List<Person> findByNameLike(String name) {
+    	logger.info("Finding persons by name with like");
+    	List<Person> persons = new ArrayList<>();
+    	try {
+    		logger.info("Finding all persons");
+    		persons = personRepository.findByNameLike("%" + name + "%");
+    	} catch (Exception e) {
+    		logger.error(e);
+    	}
+    	return persons;
     }
 
     @Override

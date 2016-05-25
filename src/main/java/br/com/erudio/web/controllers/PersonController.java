@@ -53,6 +53,30 @@ public class PersonController {
 		return personsReturn;
 	}
 	
+	@ApiOperation(value = "Find all persons" )
+	@ResponseStatus(HttpStatus.OK)
+	@RequestMapping(value = "/findByName/{name}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<Person> findByName(@PathVariable(value = "name") String name){
+		List<Person> persons = personService.findByName(name);
+		for (Person person : persons) {
+			String idPerson = person.getIdPerson().toString();
+			addHATEOASSupport(person, idPerson);
+		}
+		return persons;
+	}
+	
+	@ApiOperation(value = "Find all persons" )
+	@ResponseStatus(HttpStatus.OK)
+	@RequestMapping(value = "/findByNameLike/{name}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<Person> findByNameLike(@PathVariable(value = "name") String name){
+		List<Person> persons = personService.findByNameLike(name);
+		for (Person person : persons) {
+			String idPerson = person.getIdPerson().toString();
+			addHATEOASSupport(person, idPerson);
+		}
+		return persons;
+	}
+	
 	@ApiOperation(value = "Create a new person" )
 	@ResponseStatus(HttpStatus.OK)
 	@RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
