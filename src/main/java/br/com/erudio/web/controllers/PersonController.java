@@ -44,13 +44,7 @@ public class PersonController {
 	@RequestMapping(value = "/findAll", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<Person> findAll(){
 		List<Person> persons = personService.findAll();
-		ArrayList<Person> personsReturn = new ArrayList<Person>();
-		for (Person person : persons) {
-			String idPerson = person.getIdPerson().toString();
-			addHATEOASSupport(person, idPerson);
-			personsReturn.add(person);
-		}
-		return personsReturn;
+		return addHATEOASToPersonsList(persons);
 	}
 	
 	@ApiOperation(value = "Find all persons" )
@@ -58,11 +52,7 @@ public class PersonController {
 	@RequestMapping(value = "/findByName/{name}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<Person> findByName(@PathVariable(value = "name") String name){
 		List<Person> persons = personService.findByName(name);
-		for (Person person : persons) {
-			String idPerson = person.getIdPerson().toString();
-			addHATEOASSupport(person, idPerson);
-		}
-		return persons;
+		return addHATEOASToPersonsList(persons);
 	}
 	
 	@ApiOperation(value = "Find all persons" )
@@ -70,11 +60,7 @@ public class PersonController {
 	@RequestMapping(value = "/findByNameLike/{name}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<Person> findByNameLike(@PathVariable(value = "name") String name){
 		List<Person> persons = personService.findByNameLike(name);
-		for (Person person : persons) {
-			String idPerson = person.getIdPerson().toString();
-			addHATEOASSupport(person, idPerson);
-		}
-		return persons;
+		return addHATEOASToPersonsList(persons);
 	}
 	
 	@ApiOperation(value = "Create a new person" )
@@ -104,6 +90,14 @@ public class PersonController {
 		Person person = personService.findById(personId);
         personService.delete(person);
     }
+	
+	private List<Person> addHATEOASToPersonsList(List<Person> persons) {
+		for (Person person : persons) {
+			String idPerson = person.getIdPerson().toString();
+			addHATEOASSupport(person, idPerson);
+		}
+		return persons;
+	}
 
 	private void addHATEOASSupport(Person person, String idPerson) {
 		person.add(linkTo(methodOn(PersonController.class).get(idPerson)).withSelfRel());
