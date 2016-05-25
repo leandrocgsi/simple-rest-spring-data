@@ -47,7 +47,7 @@ public class PersonController {
 		return addHATEOASToPersonsList(persons);
 	}
 	
-	@ApiOperation(value = "Find all persons" )
+	@ApiOperation(value = "Find persons by name" )
 	@ResponseStatus(HttpStatus.OK)
 	@RequestMapping(value = "/findByName/{name}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<Person> findByName(@PathVariable(value = "name") String name){
@@ -55,7 +55,7 @@ public class PersonController {
 		return addHATEOASToPersonsList(persons);
 	}
 	
-	@ApiOperation(value = "Find all persons" )
+	@ApiOperation(value = "Find persons by name with like operator" )
 	@ResponseStatus(HttpStatus.OK)
 	@RequestMapping(value = "/findByNameLike/{name}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<Person> findByNameLike(@PathVariable(value = "name") String name){
