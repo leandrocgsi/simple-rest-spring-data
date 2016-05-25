@@ -28,8 +28,8 @@ public class SwaggerConfig {
 
     private ApiInfo apiInfo() {
         ApiInfo apiInfo = new ApiInfo(
-              "Swagger With Spring Boot",
-              "This is a simple application to demonstrate how to work with Swagger in Spring Boot project!",
+              "Spring Boot With MySQL and Spring Data",
+              "This is a simple application to demonstrate how to work with MySQL and Spring Data in Spring Boot project!",
               "Free to use and mess around",
               "erudio@gmail.com",
               "Open Licence",
